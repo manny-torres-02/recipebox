@@ -28,6 +28,11 @@ export default function Nav() {
                 About
               </Link>
             </div>
+            <div className="hidden md:flex space-x-4 items-center">
+              <Link className="text-2xl font-bold px-4 py-2" href="/add_recipe">
+                Add Recipe
+              </Link>
+            </div>
             {/* </div> */}
           </div>
         </div>

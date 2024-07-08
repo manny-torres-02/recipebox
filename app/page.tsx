@@ -9,7 +9,7 @@ export default function Home() {
         <li> Add a recipe </li>
         <li> view a recipe </li>
         <li> Share my staples </li>
-        <li> what are my friends making?</li>
+        <li> what are my friends</li>
       </div>
       <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex"></div>
     </main>
