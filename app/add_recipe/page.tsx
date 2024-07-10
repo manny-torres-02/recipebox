@@ -1,11 +1,28 @@
+"use client";
 import { useState } from "react";
 
-const submitForm = (e) => {
-  e.preventDefault();
+export default function AddRecipe() {
+  const [formData, setFormData] = useState({
+    recipeName: "",
+    ingredients: "",
+    instructions: "",
+    notes: "",
+  });
 
-  console.log("submitting form");
-};
-export default function AddRecipe(this: any) {
+  const submitForm = (event: any) => {
+    event.preventDefault();
+
+    console.log(formData.recipeName);
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
   return (
     <div>
       <p className="text-xl font-bold"> Add a Recipe </p>
@@ -24,6 +41,9 @@ export default function AddRecipe(this: any) {
               id="recipeName"
               type="text"
               placeholder="Recipe Name"
+              name="recipeName"
+              value={formData.recipeName}
+              onChange={handleInputChange}
             />
           </div>
           <div className="mb-4">
@@ -38,6 +58,9 @@ export default function AddRecipe(this: any) {
               id="ingredients"
               placeholder="List your ingredients here..."
               rows={"4"}
+              name="ingredients"
+              value={formData.ingredients}
+              onChange={handleInputChange}
             ></textarea>
           </div>
           <div className="mb-4">
@@ -52,6 +75,8 @@ export default function AddRecipe(this: any) {
               id="instructions"
               placeholder="List your instructions here..."
               rows="6"
+              value={formData.instructions}
+              onChange={handleInputChange}
             ></textarea>
           </div>
           <div className="mb-4">
@@ -66,6 +91,8 @@ export default function AddRecipe(this: any) {
               id="notes"
               placeholder="Additional notes..."
               rows="2"
+              value={formData.notes}
+              onChange={handleInputChange}
             ></textarea>
           </div>
           <div className="mb-6">
@@ -85,8 +112,8 @@ export default function AddRecipe(this: any) {
           <div className="flex items-center justify-between">
             <button
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              type="button"
-              onClick
+              type="submit"
+              // onClick={submitForm}
             >
               Submit Recipe
             </button>
