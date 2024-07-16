@@ -1,13 +1,22 @@
 "use client";
+import React from "react";
 import { useState } from "react";
+import useRecipeStore from "../store";
 
 export default function AddRecipe() {
-  const [formData, setFormData] = useState({
-    recipeName: "",
-    ingredients: "",
-    instructions: "",
-    notes: "",
-  });
+  const RecipeComponent = () => {
+    // destructure and then restructure the state values you need
+    const { recipeName, ingredients, instructions, notes } = useRecipeStore(
+      (state) => ({
+        recipeName: state.recipeName,
+        ingredients: state.ingredients,
+        instructions: state.instructions,
+        notes: state.notes,
+      })
+    );
+  };
+
+  // const ingredientString = ;
 
   const submitForm = (event: any) => {
     event.preventDefault();
