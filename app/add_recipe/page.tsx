@@ -1,37 +1,37 @@
 "use client";
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import useRecipeStore from "../store";
+import PreviousMap from "postcss/lib/previous-map";
 
 export default function AddRecipe() {
-  const RecipeComponent = () => {
-    // destructure and then restructure the state values you need
-    const { recipeName, ingredients, instructions, notes } = useRecipeStore(
-      (state) => ({
-        recipeName: state.recipeName,
-        ingredients: state.ingredients,
-        instructions: state.instructions,
-        notes: state.notes,
-      })
-    );
-  };
+  const addRecipe = useRecipeStore((state) => state.addRecipe);
 
-  // const ingredientString = ;
+  const [newRecipe, setNewRecipe] = useState({
+    recipeName: "",
+    ingredients: [],
+    instructions: "",
+    notes: "",
+  });
 
-  const submitForm = (event: any) => {
+  const submitForm = (event) => {
     event.preventDefault();
-
-    console.log(formData.recipeName);
+    addRecipe(newRecipe);
+    // Reset form after submission
+    setNewRecipe({
+      recipeName: "",
+      ingredients: [],
+      instructions: "",
+      notes: "",
+    });
   };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value,
+    setNewRecipe((prev) => ({
+      ...prev,
+      [name]: name === "ingredients" ? value.split(",") : value,
     }));
   };
-
   return (
     <div>
       <p className="text-xl font-bold"> Add a Recipe </p>
@@ -51,7 +51,7 @@ export default function AddRecipe() {
               type="text"
               placeholder="Recipe Name"
               name="recipeName"
-              value={formData.recipeName}
+              value={newRecipe.recipeName}
               onChange={handleInputChange}
             />
           </div>
@@ -64,11 +64,11 @@ export default function AddRecipe() {
             </label>
             <textarea
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="ingredients"
+              id="instructions"
               placeholder="List your ingredients here..."
-              rows={"4"}
+              rows="6"
               name="ingredients"
-              value={formData.ingredients}
+              value={newRecipe.ingredients}
               onChange={handleInputChange}
             ></textarea>
           </div>
@@ -84,7 +84,8 @@ export default function AddRecipe() {
               id="instructions"
               placeholder="List your instructions here..."
               rows="6"
-              value={formData.instructions}
+              name="instructions"
+              value={newRecipe.instructions}
               onChange={handleInputChange}
             ></textarea>
           </div>
@@ -100,7 +101,7 @@ export default function AddRecipe() {
               id="notes"
               placeholder="Additional notes..."
               rows="2"
-              value={formData.notes}
+              value={newRecipe.notes}
               onChange={handleInputChange}
             ></textarea>
           </div>
@@ -122,7 +123,7 @@ export default function AddRecipe() {
             <button
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="submit"
-              // onClick={submitForm}
+              onClick={submitForm}
             >
               Submit Recipe
             </button>
