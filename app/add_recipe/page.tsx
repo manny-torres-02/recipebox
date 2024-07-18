@@ -4,8 +4,11 @@ import useRecipeStore from "../store";
 import PreviousMap from "postcss/lib/previous-map";
 
 export default function AddRecipe() {
+  // use the zustand store teo extract the recipe fucntion
   const addRecipe = useRecipeStore((state) => state.addRecipe);
 
+  // this sets the local state of everything
+  // new recipe object will hold th e
   const [newRecipe, setNewRecipe] = useState({
     recipeName: "",
     ingredients: [],
@@ -14,7 +17,9 @@ export default function AddRecipe() {
   });
 
   const submitForm = (event) => {
+    // prevents default form submission behavior
     event.preventDefault();
+    //takes the state of the new recipe, and then adds this to the current zustand store
     addRecipe(newRecipe);
     // Reset form after submission
     setNewRecipe({
@@ -25,10 +30,15 @@ export default function AddRecipe() {
     });
   };
 
+  //handles change to the input items
+  // assigns the e.target.name and e.target.value through object destructuring
+  // for ingredeients input, it checks if the name of the input is an ingredient, thaen turns it into an array split by commas, if it is not an ingredient, it splits the values as is
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setNewRecipe((prev) => ({
       ...prev,
+      //this is the ingredients input
       [name]: name === "ingredients" ? value.split(",") : value,
     }));
   };
