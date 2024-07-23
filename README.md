@@ -3,7 +3,8 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 ## items to work on
 
 - [ ] add in a database
-- [ ]add in the update to the db
+- [ ] add in the authentication
+- [ ]
 
 ## Getting Started
 

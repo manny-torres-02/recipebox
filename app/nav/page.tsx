@@ -33,6 +33,15 @@ export default function Nav() {
                 Add Recipe
               </Link>
             </div>
+
+            <div className="hidden md:flex space-x-4 items-center">
+              <Link
+                className="text-2xl font-bold px-4 py-2"
+                href="/view_recipe"
+              >
+                ViewRecipe
+              </Link>
+            </div>
             {/* </div> */}
           </div>
         </div>
