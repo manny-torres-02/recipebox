@@ -39,7 +39,7 @@ export default function Nav() {
                 className="text-2xl font-bold px-4 py-2"
                 href="/view_recipe"
               >
-                ViewRecipe
+                RecipeList
               </Link>
             </div>
             {/* </div> */}
