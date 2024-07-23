@@ -27,7 +27,12 @@ export default function RecipeList() {
       {recipes.map((recipe) => (
         <div key={recipe.id}>
           <h3>{recipe.recipeName}</h3>
-          <p>Ingredients: {recipe.ingredients.join(", ")}</p>
+          <p>
+            Ingredients:{" "}
+            {Array.isArray(recipe.ingredients)
+              ? recipe.ingredients.join(", ")
+              : "No ingredients listed"}
+          </p>
           <p>Instructions: {recipe.instructions}</p>
           <p>Notes: {recipe.notes}</p>
         </div>
