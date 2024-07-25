@@ -2,6 +2,8 @@
 import React, { useState } from "react";
 import useRecipeStore from "../store";
 import PreviousMap from "postcss/lib/previous-map";
+import { db } from "../../app/db/firebase.js";
+import { collection, addDoc } from "firebase/firestore";
 
 export default function AddRecipe() {
   // use the zustand store teo extract the recipe fucntion
@@ -11,16 +13,34 @@ export default function AddRecipe() {
   // new recipe object will hold th e
   const [newRecipe, setNewRecipe] = useState({
     recipeName: "",
-    ingredients: [],
+    ingredients: "",
     instructions: "",
     notes: "",
   });
 
-  const submitForm = (event) => {
+  const addRecipeToFirestore = async (recipe) => {
+    try {
+      const docRef = await addDoc(collection(db, "recipes"), recipe);
+      console.log("document written with ID:", docref.id);
+    } catch (e) {
+      console.error("error adding document ", e);
+    }
+  };
+
+  const submitForm = async (event) => {
     // prevents default form submission behavior
     event.preventDefault();
     //takes the state of the new recipe, and then adds this to the current zustand store
-    addRecipe(newRecipe);
+    const recipeToAdd = {
+      ...newRecipe,
+      ingredients: newRecipe.ingredients.split(",").map((item) => item.trim()),
+      instructions: newRecipe.instructions
+        .split(",")
+        .map((item) => item.trim()),
+    };
+    await addRecipeToFirestore(recipeToAdd);
+    addRecipe(recipeToAdd); //
+
     // Reset form after submission
     setNewRecipe({
       recipeName: "",
@@ -42,6 +62,7 @@ export default function AddRecipe() {
       [name]: name === "ingredients" ? value.split(",") : value,
     }));
   };
+
   return (
     <div>
       <p className="text-xl font-bold"> Add a Recipe </p>
@@ -109,6 +130,7 @@ export default function AddRecipe() {
             <textarea
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="notes"
+              name="notes"
               placeholder="Additional notes..."
               rows="2"
               value={newRecipe.notes}
