@@ -36,10 +36,14 @@ export default function RecipeList() {
   return (
     <div>
       {recipes.map((recipe) => (
-        <div key={recipe.id}>
-          <h3>{recipe.recipeName}</h3>
-          <p>Ingredients:</p>
-          <ul>
+        <div
+          className="bg-slate-100 shadow-md rounded-lg
+        p-6 mb-4 text-slate-950 border-2"
+          key={recipe.id}
+        >
+          <h3 className="text-xl font-bold mb-2">{recipe.recipeName}</h3>
+          <p className="font-semibold">Ingredients:</p>
+          <ul className="list-disc list-inside mb-4">
             {Array.isArray(recipe.ingredients) &&
             recipe.ingredients.length > 0 ? (
               recipe.ingredients.map((ingredient, index) => (
@@ -49,8 +53,8 @@ export default function RecipeList() {
               <li>No ingredients listed</li>
             )}
           </ul>
-          <p>Instructions:</p>
-          <ol>
+          <p className="">Instructions:</p>
+          <ol className="list-decimal list-inside">
             {Array.isArray(recipe.instructions) &&
             recipe.instructions.length > 0 ? (
               recipe.instructions.map((instruction, index) => (
@@ -61,7 +65,7 @@ export default function RecipeList() {
             )}
           </ol>
           <p>Notes: {recipe.notes}</p>
-          <pre>{JSON.stringify(recipe, null, 2)}</pre>
+          {/* { <pre>{JSON.stringify(recipe, null, 2)}</pre>} */}
         </div>
       ))}
     </div>

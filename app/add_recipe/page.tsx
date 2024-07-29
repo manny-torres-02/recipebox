@@ -21,7 +21,7 @@ export default function AddRecipe() {
   const addRecipeToFirestore = async (recipe) => {
     try {
       const docRef = await addDoc(collection(db, "recipes"), recipe);
-      console.log("document written with ID:", docref.id);
+      console.log("document written with ID:", docRef.id);
     } catch (e) {
       console.error("error adding document ", e);
     }
@@ -33,10 +33,8 @@ export default function AddRecipe() {
     //takes the state of the new recipe, and then adds this to the current zustand store
     const recipeToAdd = {
       ...newRecipe,
-      ingredients: newRecipe.ingredients.split(",").map((item) => item.trim()),
-      instructions: newRecipe.instructions
-        .split(",")
-        .map((item) => item.trim()),
+      ingredients: newRecipe.ingredients,
+      instructions: newRecipe.instructions,
     };
     await addRecipeToFirestore(recipeToAdd);
     addRecipe(recipeToAdd); //
@@ -44,7 +42,7 @@ export default function AddRecipe() {
     // Reset form after submission
     setNewRecipe({
       recipeName: "",
-      ingredients: [],
+      ingredients: "",
       instructions: "",
       notes: "",
     });
