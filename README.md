@@ -2,8 +2,9 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## items to work on
 
-- [ ] add in a database
+- [x] add in a database
 - [ ] add in the authentication
+- [ ] display one recipe on the main page
 - [ ]
 
 ## Getting Started
