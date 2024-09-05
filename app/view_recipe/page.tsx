@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { db } from "../../app/db/firebase.js";
+import { db } from "../firebase/firebase.js";
 import { collection, getDocs } from "firebase/firestore";
 import { useState, useEffect } from "react";
 import useRecipeStore from "../store";

@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 
+
 export default function create_account() {
   const [email, setEmail] = useState();
   const [password, setNewPassword] = useState();

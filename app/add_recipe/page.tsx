@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import useRecipeStore from "../store";
 import PreviousMap from "postcss/lib/previous-map";
-import { db } from "../../app/db/firebase.js";
+import { db } from "../firebase/firebase.js";
 import { collection, addDoc } from "firebase/firestore";
 
 export default function AddRecipe() {
